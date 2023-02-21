@@ -1,4 +1,4 @@
-# Graphql integration with node and react
+# Graphql Integration with Node(Server) and React(Client)
 
 Here we will discuss how graphql works with our server and client
 
