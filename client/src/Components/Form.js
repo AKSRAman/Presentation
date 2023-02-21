@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CREATE_USER_MUTATION } from "../GraphQL/Mutations";
 import { useMutation } from "@apollo/client";
 
-function Form() {
+function Form({userQuery}) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,7 +19,6 @@ function Form() {
         password: password,
       },
     });
-
     if (error) {
       console.log(error);
     }

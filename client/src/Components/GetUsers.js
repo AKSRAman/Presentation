@@ -1,29 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { LOAD_USERS } from "../GraphQL/Queries";
+import Form from "./Form";
 
 function GetUsers() {
   const { data } = useQuery(LOAD_USERS);
   const [users, setUsers] = useState([]);
-  useEffect(() => {
+
+  function getUser(){
     if (data) {
-      setUsers(data.getAllUsers);
+      let user = [...data.getAllUsersFromMongo]
+      user = user.reverse()
+      setUsers(user);
     }
-  }, [data]);
+  }
+
+  useEffect(() => {
+    getUser()
+  }, []);
   return (
     <div>
+       <Form userQuery={getUser}/>
+       <br/>
        <table>
-        <tr>
+         <thead>
+         <tr>
           <th>Id</th>
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
           <th>Password</th>
         </tr>
-        {users.map((val) => {
+         </thead>
+       <tbody>
+       {users.map((val,i) => {
           return (
-            <tr>
-              <td>{val.id}</td>
+            <tr key={i}>
+              <td>{i+1}</td>
               <td>{val.firstName}</td>
               <td>{val.lastName}</td>
               <td>{val.email}</td>
@@ -31,6 +44,8 @@ function GetUsers() {
             </tr>
           )
         })}
+       </tbody>
+        
       </table>
     </div>
   );
