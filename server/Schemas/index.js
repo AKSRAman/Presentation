@@ -28,13 +28,13 @@ const Mutation = new GraphQLObjectType({
         password: { type: GraphQLString },
       },
       resolve(parent, args) {
-        let author = new userMongo({
+        let user = new userMongo({
           firstName: args.firstName,
           lastName: args.lastName,
           email: args.email,
           password: args.password
         });
-        return author.save()
+        return user.save()
       },
     },
   },

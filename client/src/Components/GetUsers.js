@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { LOAD_USERS } from "../GraphQL/Queries";
 import Form from "./Form";
+import "./User.css"
 
 function GetUsers() {
   const { data } = useQuery(LOAD_USERS);
@@ -17,7 +18,7 @@ function GetUsers() {
 
   useEffect(() => {
     getUser()
-  }, []);
+  }, [data]);
   return (
     <div>
        <Form userQuery={getUser}/>
@@ -29,7 +30,6 @@ function GetUsers() {
           <th>First Name</th>
           <th>Last Name</th>
           <th>Email</th>
-          <th>Password</th>
         </tr>
          </thead>
        <tbody>
@@ -40,12 +40,10 @@ function GetUsers() {
               <td>{val.firstName}</td>
               <td>{val.lastName}</td>
               <td>{val.email}</td>
-              <td>{val.password}</td>
             </tr>
           )
         })}
        </tbody>
-        
       </table>
     </div>
   );
